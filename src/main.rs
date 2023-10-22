@@ -20,8 +20,6 @@ struct Cli {
     input: std::path::PathBuf,
     #[arg(short, long)]
     output: std::path::PathBuf,
-    #[arg(long)]
-    outformat: String,
 }
 
 
@@ -29,11 +27,11 @@ struct Cli {
 fn main() {
     
     let args = Cli::parse();
-
+    
     match args.command.as_str() {
         "convertvideo" => {
             let video = Video::new(args.input.to_str().unwrap().to_string());
-            video.convert_video(args.output.to_str().unwrap(), args.outformat.as_str());
+            let _ = video.convert_video(args.output.to_str().unwrap());
         },
         _ => {
             println!("Unknown command {}", args.command);

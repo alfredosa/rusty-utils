@@ -1,4 +1,5 @@
-[[haiku]]
+#[[haiku]]
+
 rust is trust
 bust is rust
 
@@ -13,3 +14,4 @@ efficient sadness
 
 rust is dust
 dust is rust
+
