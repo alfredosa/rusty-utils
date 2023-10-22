@@ -1,10 +1,12 @@
 mod video;
+mod weather;
 
 mod prelude {
     pub use std::env;
     pub use std::fs;
     pub use crate::video::*;
     pub use clap::Parser;
+    pub use crate::weather::*;
 }
 
 use prelude::*;
@@ -26,6 +28,10 @@ struct Cli {
     /// output file path
     #[arg(short, long)]
     output: Option<std::path::PathBuf>,
+
+    /// forecast city if forecast command was called
+    #[arg(long)]
+    city: Option<String>,
 }
 
 
@@ -40,7 +46,7 @@ fn main() {
             let _ = video.convert_video(args.output.unwrap().to_str().unwrap());
         },
         "forecast" => {
-            println!("Forecasting");
+            get_weather(args.city.unwrap_or("Oslo".to_string())).expect("Failed to get weather");
         },
         _ => {
             println!("Unknown command {}", args.command);
