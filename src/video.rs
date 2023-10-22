@@ -5,7 +5,6 @@ use std::error::Error;
 use std::fmt;
 use std::process::Stdio;
 
-// Define a custom error type
 #[derive(Debug)]
 struct FFmpegError(String);
 
@@ -19,8 +18,6 @@ impl Error for FFmpegError {}
 
 pub struct Video {
     file_path: String,
-    file_name: String,
-    file_size: u64,
 }
 
 
@@ -50,7 +47,6 @@ impl Video {
             panic!("{} is a directory", file_path);
         }
     
-        // Use format! for improved prints
         let details = format!(
             "file name: {}\nfile size: {}\nfile path: {}",
             file_name,
@@ -61,8 +57,6 @@ impl Video {
     
         Self {
             file_path,
-            file_name,
-            file_size,
         }
     }
     
