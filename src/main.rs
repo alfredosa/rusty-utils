@@ -1,5 +1,7 @@
 mod video;
 mod weather;
+mod utils;
+mod drive_backup;
 
 mod prelude {
     pub use std::env;
@@ -7,6 +9,8 @@ mod prelude {
     pub use crate::video::*;
     pub use clap::Parser;
     pub use crate::weather::*;
+    pub use crate::utils::*;
+    pub use crate::drive_backup::*;
 }
 
 use prelude::*;
@@ -47,6 +51,11 @@ fn main() {
         },
         "forecast" => {
             get_weather(args.city.unwrap_or("Oslo".to_string())).expect("Failed to get weather");
+        },
+        "backup" => {
+            let drive_backup = DriveBackup::new(args.input.unwrap().to_str().unwrap().to_string());
+            let _ = drive_backup.backup();
+            // google drive api call
         },
         _ => {
             println!("Unknown command {}", args.command);
